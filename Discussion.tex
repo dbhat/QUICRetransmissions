@@ -1,0 +1,12 @@
+\section{Discussion}
+\label{sec:dicsussion}
+
+\subsection{Multipath}
+\label{sec:mpath}
+Especially in the case of mobile devices like smart phones the Internet can be accessed via different technologies (e.g., WiFi and LTE). Thus, videos can be streamed via multipath to such a device, which has been suggested for ABR streaming~\cite{Han:CoNEXT:2016}. While we do not investigate the potential impact of multipath streaming based on HTTP/2 in this paper, we briefly outline the potential benefits of its usage. First, a multipath approach can increase the available bandwidth between client and server and, accordingly result in a higher quality streaming session. Second, it can be decided what data is sent on which path. Third, even if the connection to one of the access technologies is lost streaming can be continued. Though, potentially in a lower quality.
+
+Since the retransmission approach we present in this paper is already based on the concept of separate streams in an HTTP/2 session, making use of a multipath approach is a logical consequence. For example, one could envision a scenario in which original segments are transmitted over the WiFi path, while retransmission are scheduled on the stream that uses the LTE path. While a TCP-based approach will still have the drawback of HOL blocking (as described in Sect.~\ref{subsec:example}), we conjecture that a QUIC-based multipath approach will perform better.
+
+\subsection{SDN Support}
+\label{subsec:sdn}
+In our work on network assisted ABR streaming~\cite{Bhat:MMSys:2017}, we have shown how link bandwidth information with increased accuracy can improve the QoE of a streaming session. Such information can also be beneficial for the retransmission approach we present in this paper. In~\cite{Bhat:MMSys:2017}, we have shown that a combination of information on past link bandwidth and an ARIMA-based prediction of future link bandwidth can assist the bitrate quality selection of DASH streaming algorithms. In the case of our segment retransmission approach, ARIMA-based bandwidth predictions can be taken into account to decide if a segment can be retransmitted in time before its playout deadline.
