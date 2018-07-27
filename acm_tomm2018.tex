@@ -1,0 +1,140 @@
+% THIS IS SIGPROC-SP.TEX - VERSION 3.1
+% WORKS WITH V3.2SP OF ACM_PROC_ARTICLE-SP.CLS
+% APRIL 2009
+%
+% It is an example file showing how to use the 'acm_proc_article-sp.cls' V3.2SP
+% LaTeX2e document class file for Conference Proceedings submissions.
+% ----------------------------------------------------------------------------------------------------------------
+% This .tex file (and associated .cls V3.2SP) *DOES NOT* produce:
+%       1) The Permission Statement
+%       2) The Conference (location) Info information
+%       3) The Copyright Line with ACM data
+%       4) Page numbering
+% ---------------------------------------------------------------------------------------------------------------
+% It is an example which *does* use the .bib file (from which the .bbl file
+% is produced).
+% REMEMBER HOWEVER: After having produced the .bbl file,
+% and prior to final submission,
+% you need to 'insert'  your .bbl file into your source .tex file so as to provide
+% ONE 'self-contained' source file.
+%
+% Questions regarding SIGS should be sent to
+% Adrienne Griscti ---> griscti@acm.org
+%
+% Questions/suggestions regarding the guidelines, .tex and .cls files, etc. to
+% Gerald Murray ---> murray@hq.acm.org
+%
+% For tracking purposes - this is V3.1SP - APRIL 2009
+
+%\documentclass{acm_proc_article-sp}
+\documentclass[acmsmall]{acmart}
+%\documentclass[sigconf]{acmart}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{balance}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{fixltx2e}
+% \usepackage{subfigure}
+%\usepackage{graphicx}
+%\usepackage[tight,footnotesize]{subfigure}
+\usepackage{comment}
+%\usepackage[all]{nowidow} % unlearn the latex2e "feature" of orphaned headings
+\usepackage{color} % for colored comments
+\usepackage[normalem]{ulem} % strikethrough comment sout
+\usepackage{url}
+\usepackage{pbox}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{multirow}
+\usepackage{courier}
+
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+
+\definecolor{brightmaroon}{rgb}{0.76, 0.13, 0.28}
+\definecolor{cadmiumgreen}{rgb}{0.0, 0.42, 0.24}
+
+\newcommand\DB[1]{\textcolor{brightmaroon}{#1}}
+\newcommand\MZ[1]{\textcolor{blue}{#1}}
+\newcommand\RJ[1]{\textcolor{cadmiumgreen}{#1}}
+% \newcommand\CW[1]{\textcolor{magenta}{#1}}
+
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{corollary}[theorem]{Corollary}
+
+\usepackage{caption}
+\DeclareCaptionFormat{myformat}{#1#2#3\hspace{5pt}}
+\captionsetup{format=myformat}
+\captionsetup[lstlisting]{position=bottom,format=myformat}
+
+\usepackage{ifthen}
+\newboolean{techrep} %boolean variable
+\setboolean{techrep}{false} %true for technical report version
+
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{setspace}
+%\def\flagTech
+%\makeatletter
+%\def\@copyrightspace{\relax}
+%\makeatother
+% Copyright
+\setcopyright{acmcopyright}
+\begin{document}
+
+
+\title{Improving QoE of ABR Streaming Sessions through\\ QUIC Retransmissions}
+\author{
+\hspace{50pt} 
+Divyashri Bhat, Rajvardhan Deshmukh, Michael Zink
+}
+\affiliation{
+\institution{University of Massachusetts Amherst}
+}
+\email{dbhat@ecs.umass.edu, rdeshmukh@umass.edu, zink@ecs.umass.edu}
+
+
+%\newcommand{\hi}[1]{\textcolor{red}{#1}}
+%\newcommand{\red}[1]{\textcolor{red}{#1}}
+
+
+\begin{abstract}
+While adaptive bitrate (ABR) streaming has contributed significantly to the reduction of video playout stalling, ABR clients continue to suffer from the variation of bit rate qualities over the duration of a streaming session. Similar to stalling, these variations in bit rate quality have a negative impact on the users' Quality of Experience (QoE).
+In this paper, we use a trace from a large-scale CDN to show that such quality changes occur in a significant amount of streaming sessions and investigate an ABR video segment retransmission approach to reduce the number of such quality changes. As the new HTTP/2 standard is becoming increasingly popular, we also see an increase in the usage of QUIC as an alternative protocol for the transmission of web traffic including video streaming. Using various network conditions, we conduct a systematic comparison of existing transport layer approaches for HTTP/2 that is best suited for ABR segment retransmissions. Since it is well known that both protocols provide a series of improvements over HTTP/1.1, we perform experiments both in controlled environments and over transcontinental links in the Internet and find that these benefits also ``trickle up'' into the application layer when it comes to ABR video streaming where QUIC retransmissions can \textit{significantly} improve the average quality bitrate while simultaneously \textit{minimizing} bit rate variations over the duration of a streaming session.
+%After its standardization HTTP/2 is gaining more popularity and we also see an increase in the usage of QUIC as an alternative protocol for the transmission of web traffic. 
+\end{abstract}
+\copyrightyear{2018} 
+\acmYear{2018} 
+\setcopyright{acmlicensed}
+%\acmConference{NOSSDAV'17}{June 20-23, 2018}{Taipei, Taiwan}\acmPrice{15.00}\acmDOI{http://dx.doi.org/10.1145/3083165.3083175}
+%\acmISBN{978-1-4503-5003-7/17/06}
+%\keywords{Video streaming protocols, DASH, QUIC, HTTP/2, ABR streaming, Video quality metrics, QoE}
+\keywords{ABR streaming, DASH, QUIC, HTTP/2, QoE}
+\maketitle
+%\terms{Measurement, Performance}
+
+%\keywords{DASH, YouTube} % NOT required for Proceedings
+%\vspace{-8pt}
+\input{Introduction}
+\input{Background}
+\input{Retrans}
+\input{Evaluation}
+%\input{Discussion}
+\input{RelatedWork}
+\input{Conclusion}
+\clearpage
+%\bibliography{sigproc}
+\bibliographystyle{abbrv}
+\balance\bibliography{paperms}  % sigproc.bib is the name of the Bibliography in this case
+% You must have a proper ".bib" file
+%  and remember to run:
+% latex bibtex latex latex
+% to resolve all references
+%
+
+\end{document}
+
+
